@@ -1,0 +1,34 @@
+{
+  "manifest_version": 2,
+  "name": "Visit Counter",
+  "description": "Counts how often you visit which websites.",
+  "homepage_url": "https://github.com/azadad96",
+  "version": "1.0",
+
+  "icons": {
+    "96": "icon96.png"
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["visit.js"]
+    }
+  ],
+
+  "background": {
+    "scripts": ["showdata.js"]
+  },
+
+  "browser_action": {
+    "default_icon": {
+      "96": "icon96.png"
+    },
+    "default_title": "show data"
+  },
+
+  "permissions": [
+    "storage",
+    "unlimitedStorage"
+  ]
+}
