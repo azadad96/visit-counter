@@ -3,11 +3,11 @@
   "name": "Visit Counter",
   "description": "Counts how often you visit which websites.",
   "homepage_url": "https://github.com/azadad96",
-  "version": "1.3",
+  "version": "1.4",
 
   "browser_specific_settings": {
     "gecko": {
-      "id": "YOUR_KEY"
+      "id": "{5306e664-1071-409a-8cab-fc9a3c24828b}"
     }
   },
 
