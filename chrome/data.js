@@ -1,8 +1,7 @@
 window.onload = () => {
 	var dataDiv = document.getElementById("data");
 
-	var getVisited = browser.storage.local.get();
-	getVisited.then((res) => {
+	var getVisited = chrome.storage.local.get((res) => {
 		var elements = [];
 		for (var i of Object.keys(res)) {
 			elements.push({
