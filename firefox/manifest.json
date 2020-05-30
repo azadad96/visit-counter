@@ -30,7 +30,7 @@
     "default_icon": {
       "96": "icon96.png"
     },
-    "default_title": "show data"
+    "default_title": "Visit Counter"
   },
 
   "permissions": [
