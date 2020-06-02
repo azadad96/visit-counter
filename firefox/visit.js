@@ -9,5 +9,4 @@ getVisited.then((res) => {
   var a = {};
   a[window.location.host] = numVisited;
 	browser.storage.local.set(a);
-	console.log(res);
 });
