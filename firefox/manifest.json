@@ -3,7 +3,7 @@
   "name": "Visit Counter",
   "description": "Counts how often you visit which websites.",
   "homepage_url": "https://github.com/azadad96",
-  "version": "1.7",
+  "version": "1.8",
 
   "browser_specific_settings": {
     "gecko": {

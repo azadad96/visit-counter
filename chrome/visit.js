@@ -8,5 +8,4 @@ var getVisited = chrome.storage.local.get((res) => {
   var a = {};
   a[window.location.host] = numVisited;
 	chrome.storage.local.set(a);
-	console.log(res);
 });

@@ -1,0 +1,27 @@
+html, body, #data {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	width: 100%;
+	height: 100%;
+}
+
+body {
+	background-color: #1E2026;
+	overflow-x: hidden;
+}
+
+#settings {
+	width: 50%;
+	margin: 10px auto;
+}
+
+.input {
+	width: 100%;
+	background-color: #6E7070;
+	color: white;
+	padding: 5px;
+	margin: 5px;
+	border-radius: 8px;
+	border: 0;
+}
