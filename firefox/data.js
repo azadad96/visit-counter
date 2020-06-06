@@ -3,6 +3,20 @@ window.onload = () => {
 		window.open("configure.html");
 	};
 
+	document.getElementById("clear").onclick = () => {
+		if (!confirm("Are you sure you want to delete all data?"))
+			return;
+		var getData = browser.storage.local.get();
+		getData.then((res) => {
+			browser.storage.local.clear();
+			browser.storage.local.set({
+				config: res.config
+			}).then(() => {
+				window.location.reload(false);
+			});
+		});
+	};
+
 	document.getElementById("export").onclick = () => {
 		var getVisited = browser.storage.local.get();
 		getVisited.then((res) => {
@@ -39,6 +53,14 @@ window.onload = () => {
 
 	var getVisited = browser.storage.local.get();
 	getVisited.then((res) => {
+		for (var i of document.getElementsByClassName("btn")) {
+			i.style.backgroundColor = res.config.foreground;
+			i.style.color = res.config.text;
+			i.style.fontSize = res.config.font;
+		}
+		document.body.style.fontSize = res.config.font;
+		document.body.style.backgroundColor = res.config.background;
+
 		var elements = [];
 		for (var i of Object.keys(res)) {
 			if (i == "config")
@@ -77,11 +99,5 @@ window.onload = () => {
 			i.style.color = res.config.text;
 			i.style.height = (20 * Number(res.config.font.split("px")[0]) / 16).toString() + "px";
 		}
-		document.getElementById("config").style.backgroundColor = res.config.foreground;
-		document.getElementById("config").style.color = res.config.text;
-		document.getElementById("export").style.backgroundColor = res.config.foreground;
-		document.getElementById("export").style.color = res.config.text;
-		document.body.style.fontSize = res.config.font;
-		document.body.style.backgroundColor = res.config.background;
 	});
 };
