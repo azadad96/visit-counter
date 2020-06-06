@@ -3,7 +3,7 @@
   "name": "Visit Counter",
   "description": "Counts how often you visit which websites.",
   "homepage_url": "https://github.com/azadad96",
-  "version": "1.9",
+  "version": "2.0",
 
   "icons": {
     "96": "icon96.png"

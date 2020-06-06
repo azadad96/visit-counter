@@ -40,10 +40,13 @@ body {
  	visibility: visible;
 }
 
-#config {
+#btns {
 	position: fixed;
 	right: 20px;
 	bottom: 10px;
+}
+
+.btn {
 	background-color: #6E7070;
 	border-color: #6E7070;
 	color: white;

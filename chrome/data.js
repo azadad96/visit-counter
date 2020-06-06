@@ -1,13 +1,63 @@
-function configure() {
-	window.open("configure.html");
-}
-
 window.onload = () => {
-	document.getElementById("config").onclick = configure;
+	document.getElementById("config").onclick = () => {
+		window.open("configure.html");
+	};
+
+	document.getElementById("clear").onclick = () => {
+		if (!confirm("Are you sure you want to delete all data?"))
+			return;
+		chrome.storage.local.get((res) => {
+			chrome.storage.local.clear();
+			chrome.storage.local.set({
+				config: res.config
+			}, () => {
+				window.location.reload(false);
+			});
+		});
+	};
+
+	document.getElementById("export").onclick = () => {
+		chrome.storage.local.get((res) => {
+			var data = "website,visits";
+			var elements = [];
+			for (var i of Object.keys(res)) {
+				if (i == "config")
+					continue;
+				elements.push({
+					url: i,
+					visits: res[i]
+				});
+			}
+			elements.sort((a, b) => (a.visits > b.visits) ? -1 : 0);
+
+			for (var i of elements)
+				data += "\n" + i.url + "," + i.visits;
+
+			var blob = new Blob([data], {type: 'text/csv'});
+		    if (window.navigator.msSaveOrOpenBlob) {
+		        window.navigator.msSaveBlob(blob, "visit_counter.csv");
+		    } else {
+		        var a = window.document.createElement('a');
+		        a.href = window.URL.createObjectURL(blob);
+		        a.download = "visit_counter.csv";        
+		        document.body.appendChild(a);
+		        a.click();        
+		        document.body.removeChild(a);
+		    }
+		});
+	};
 
 	var dataDiv = document.getElementById("data");
 
-	var getVisited = chrome.storage.local.get((res) => {
+	chrome.storage.local.get((res) => {
+		for (var i of document.getElementsByClassName("btn")) {
+			i.style.backgroundColor = res.config.foreground;
+			i.style.color = res.config.text;
+			i.style.fontSize = res.config.font;
+		}
+		document.body.style.fontSize = res.config.font;
+		document.body.style.backgroundColor = res.config.background;
+
 		var elements = [];
 		for (var i of Object.keys(res)) {
 			if (i == "config")
@@ -17,7 +67,7 @@ window.onload = () => {
 				visits: res[i]
 			});
 		}
-		elements.sort((a, b) => (a.visits > b.visits) ? -1 : 0);
+		elements.sort((a, b) => (a.visits > b.visits) ? 0 : 1);
 		
 		if (elements.length == 0)
 			return;
@@ -46,9 +96,5 @@ window.onload = () => {
 			i.style.color = res.config.text;
 			i.style.height = (20 * Number(res.config.font.split("px")[0]) / 16).toString() + "px";
 		}
-		document.getElementById("config").style.backgroundColor = res.config.foreground;
-		document.getElementById("config").style.color = res.config.text;
-		document.body.style.fontSize = res.config.font;
-		document.body.style.backgroundColor = res.config.background;
 	});
 };
