@@ -67,7 +67,7 @@ window.onload = () => {
 				visits: res[i]
 			});
 		}
-		elements.sort((a, b) => (a.visits > b.visits) ? 0 : 1);
+		elements.sort((a, b) => (a.visits > b.visits) ? -1 : 0);
 		
 		if (elements.length == 0)
 			return;
