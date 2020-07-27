@@ -77,6 +77,7 @@ window.onload = () => {
 		var max = elements[0].visits;
 		for (var obj of elements) {
 			var val = obj.visits / max * 100;
+            val = val >= 1 ? val : 1;
 			var div = document.createElement("div");
 			div.style.width = val.toString() + "%";
 			div.className = "bar";
@@ -84,7 +85,7 @@ window.onload = () => {
 			for (var i = 0; i < (5 - obj.visits.toString().length); i++) {
 				a += "&nbsp;";
 			}
-			div.innerHTML = obj.visits.toString() + a + obj.url + "<span class=\"tooltip\">" + obj.url + "</span>";
+			div.innerHTML = obj.visits.toString() + a + obj.url + "<span class=\"tooltip\">" + obj.visits + " " + obj.url + "</span>";
 			dataDiv.appendChild(div);
 		}
 
